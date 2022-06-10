@@ -1,7 +1,37 @@
 import { Divider, Flex, InputGroup, InputLeftAddon,Input, Text, Button } from '@chakra-ui/react';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { ethers } from 'ethers';
+import Chain from '../smartcontracts/artifacts/contracts/Chain.sol/Chains.json'
 
 const Ownership =() =>{
+
+    const[hash,setHash]=useState('');
+    const[amount,setAmount]=useState('');
+    const[desc,setDesc]=useState('');
+    const[account,setAccount]=useState('');
+    const[provider,setProvider]=useState('');
+    const[signer,setSigner]=useState(null);
+
+    useEffect(()=>{
+        connectWallet();
+    },[])
+
+    const connectWallet = async() =>{
+        const provider = new ethers.providers.Web3Provider(window.ethereum, "any");
+        await provider.send("eth_requestAccounts", []);
+        const signer = provider.getSigner();
+        const addr = await signer.getAddress()
+        setAccount(addr)
+        setProvider(provider)
+        setSigner(signer);
+    }
+
+    const ContractInterface = new ethers.Contract('0x2393cA4e446964A94935a8113f2273756319d832',Chain.abi,signer);
+
+    const addImage=()=>{
+        ContractInterface.addImage(hash,amount,desc);
+    }
+
     return(
     <Flex flexDirection={"column"} mt={"45px"} padding={"20px"} alignItems={"center"} borderWidth={"2px"} width={"85%"} height={"fit-content"} borderColor={"gray"} rounded={"2xl"} > 
         <Text color={"white"} mb={"10px"} >Claim Ownership</Text>
@@ -21,7 +51,7 @@ const Ownership =() =>{
             <Input bgColor={"gray.800"} color={"white"}  />
         </InputGroup>
 
-        <Button mt={"20px"} >Mint image as NFT</Button>
+        <Button onClick={addImage} mt={"20px"} >Claim Ownership</Button>
     </Flex>)
 }
 
