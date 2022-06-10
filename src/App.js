@@ -17,6 +17,7 @@ import IPFSUpload from './component/IPFSUpload';
 import Ownership from './component/Ownership';
 import { ethers } from 'ethers';
 import { useState,useEffect } from 'react';
+import ImageList from './component/ImageList';
 
 function App() {
 
@@ -52,6 +53,7 @@ function App() {
             <Ownership/>
           </Flex>
         </Flex>
+        <ImageList/>
         
       </Flex>
     </ChakraProvider>

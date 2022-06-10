@@ -26,10 +26,10 @@ const Ownership =() =>{
         setSigner(signer);
     }
 
-    const ContractInterface = new ethers.Contract('0x2e565DA550D975e3d13c5FA3C7D9d5a40c65BD5d',Chain.abi,signer);
+    const ContractInterface = new ethers.Contract('0xa5c2202D84BeC33a348F7EF4c3b9d1Fea47471Ff',Chain.abi,signer);
 
     const addImage=()=>{
-        ContractInterface.addImage(hash,amount,desc);
+        ContractInterface.addImage(amount,desc,hash);
     }
 
     return(
@@ -38,17 +38,17 @@ const Ownership =() =>{
         <Divider/>
         <InputGroup mt={"15px"} >
             <InputLeftAddon children='IPFS Hash' />
-            <Input bgColor={"gray.800"} color={"white"}  />
+            <Input onChange={(e) => setHash(e.target.value)} bgColor={"gray.800"} color={"white"}  />
         </InputGroup>
 
         <InputGroup mt={"15px"} >
             <InputLeftAddon children='Amount' />
-            <Input bgColor={"gray.800"} color={"white"}  />
+            <Input onChange={(e) => setAmount(e.target.value)} bgColor={"gray.800"} color={"white"}  />
         </InputGroup>
 
         <InputGroup mt={"15px"} >
             <InputLeftAddon children='Description' />
-            <Input bgColor={"gray.800"} color={"white"}  />
+            <Input onChange={(e) => setDesc(e.target.value)} bgColor={"gray.800"} color={"white"}  />
         </InputGroup>
 
         <Button onClick={addImage} mt={"20px"} >Claim Ownership</Button>
