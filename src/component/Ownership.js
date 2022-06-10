@@ -26,7 +26,7 @@ const Ownership =() =>{
         setSigner(signer);
     }
 
-    const ContractInterface = new ethers.Contract('0x2393cA4e446964A94935a8113f2273756319d832',Chain.abi,signer);
+    const ContractInterface = new ethers.Contract('0x2e565DA550D975e3d13c5FA3C7D9d5a40c65BD5d',Chain.abi,signer);
 
     const addImage=()=>{
         ContractInterface.addImage(hash,amount,desc);

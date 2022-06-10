@@ -20,7 +20,7 @@ async function main() {
   const chain = await Chain.deploy();
 
   await greeter.deployed();
-  await Chain.deployed();
+  await chain.deployed();
 
   console.log("Greeter deployed to:", greeter.address);
 }
